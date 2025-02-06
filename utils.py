@@ -3,7 +3,8 @@ import os
 import platform
 import subprocess
 import sys
-from collections import Iterable
+#from collections import Iterable
+from collections.abc import Iterable
 
 import __main__
 import pandas
@@ -62,5 +63,6 @@ def benchmark(keys, inputs, pin_to_cpu=False, repeat=5, y_axis="Time"):
         result = {key: values[index] for (index, key) in enumerate(keys)}
         result[y_axis] = value
 
-        frame = frame.append(result, ignore_index=True)
+        #frame = frame.append(result, ignore_index=True)
+        frame = pandas.concat([frame, pandas.DataFrame([result])], ignore_index=True)
     return frame
